@@ -8,8 +8,14 @@ CATEGORY_LIST = ['女生衣著', '男生衣著', '配件', '鞋子', '3C相關',
 
 describe 'Shopee scrap testament' do
   it 'should return an array of string and name of categories' do
+    TESTAMENT_ARR = []
+    
+    CATEGORY_LIST.each do |e|
+        TESTAMENT_ARR.push({'title' => e})
+    end
+    
     scraper = ShopeeTileScrape::ShopeeTile.new
     category_arr = JSON.parse(scraper.titles)
-    category_arr.must_equal CATEGORY_LIST
+    category_arr.must_equal TESTAMENT_ARR
   end
 end
