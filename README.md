@@ -7,9 +7,15 @@ Filter Category from  [Shopee](http://shopee.tw/mobile/)
 ### Installation
 - Install packages
 ```
-bundle install
+$ bundle install
 ```
 - Run
 ```
-./bin/shopee_titles
+$ ./bin/shopee_titles
+```
+
+### Test
+```shell
+$ cd spec
+$ ruby shopee_spec.rb
 ```
