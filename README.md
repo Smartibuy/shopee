@@ -2,7 +2,7 @@
 
 ## Description
 
-Filter Category from Google News (https://news.google.com.tw)
+Filter Category from  [Shopee](http://shopee.tw/mobile/)
 
 ### Installation
 - Install packages
@@ -11,5 +11,5 @@ bundle install
 ```
 - Run
 ```
-./bin/news_titles
+./bin/shopee_scrap
 ```
