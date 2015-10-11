@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+require 'json'
+require './lib/newstitle_scrap'
+
+begin
+  google_news = NewsTileScrape::NewsTile.new
+  news_arr = JSON.parse(google_news.titles)
+
+  news_arr.each do |hash|
+    puts "- #{hash['title']} "
+  end
+
+rescue => e
+  puts "Error occured - see details: #{e}"
+end
