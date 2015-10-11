@@ -11,5 +11,5 @@ bundle install
 ```
 - Run
 ```
-./bin/shopee_scrap
+./bin/shopee_titles
 ```
