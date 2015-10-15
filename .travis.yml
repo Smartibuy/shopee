@@ -1,4 +1,0 @@
-language: ruby
-rvm:
-  - ruby-head
-  - jruby-head
