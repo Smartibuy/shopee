@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require '../lib/shopee_scrap'
+require_relative '../lib/shopee_scrap'
 require 'json'
 
 CATEGORY_LIST = ['女生衣著', '男生衣著', '配件', '鞋子', '3C相關', '手機平板與周邊', '居家生活',
