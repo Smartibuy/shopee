@@ -1,8 +1,10 @@
-# Team-HW-1-Ideate-and-Scrape
+# Ideate-and-Scrape 
+
+[![Build Status](https://travis-ci.org/Smartibuy/ideate-and-scrape.svg?branch=master)](https://travis-ci.org/Smartibuy/ideate-and-scrape)
 
 ## Description
 
-Filter Category from  [Shopee](http://shopee.tw/mobile/)
+Parse Category from  [Shopee](http://shopee.tw/mobile/)
 
 ### Installation
 - Install packages
