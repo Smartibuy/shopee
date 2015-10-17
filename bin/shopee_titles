@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'json'
-require './lib/shopee_scrap'
+require_relative '../lib/shopee_scrap'
 
 begin
   google_news = ShopeeTileScrape::ShopeeTile.new
