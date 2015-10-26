@@ -4,7 +4,7 @@ Scrape informations from
 - [Ruten](http://www.ruten.com.tw/) 
 - [Shopee](http://shopee.tw/mobile/) (depreciated)
 
-[![Build Status](https://github.com/Smartibuy/shopee.svg?branch=master)](https://travis-ci.org/Smartibuy/shopee)
+[![Build Status](https://travis-ci.org/Smartibuy/shopee.svg?branch=master)](https://travis-ci.org/Smartibuy/shopee)
 [![Gem Version](https://badge.fury.io/rb/shopee.svg)](https://badge.fury.io/rb/shopee)
 
 ### Get started
