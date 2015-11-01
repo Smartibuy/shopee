@@ -3,15 +3,12 @@ require 'open-uri'
 require 'json'
 
 
-module ShopeeTileScrape
-  class ShopeeTile
+module ShopeeScrape
+  class Shopee
 
-    URL = 'http://mall.shopee.tw/?utm_source=OrganicA&utm_medium=OrganicA&utm_campaign=lp_home_mall'
-    XPATH_CARD = "//div[(@class='title')]"
-    CARD_TITLE_XPATH = "//div[(@class='list-wrapper')]"
-
-    def initialize
-      parse_html
+    def initialize(category, page)
+      @category = category
+      @page = page
     end
 
     def titles

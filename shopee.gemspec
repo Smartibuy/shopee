@@ -2,15 +2,15 @@ $LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'shopee/version'
 Gem::Specification.new do |s|
   s.name = 'shopee'
-  s.version = ShopeeTileScrape::VERSION
-  s.date = ShopeeTileScrape::DATE
-  s.executables << 'shopee_titles'
-  s.summary = 'Scrape categories of shopee!'
-  s.description = 'Scrape categories of shopee!'
+  s.version = ShopeeScrape::VERSION
+  s.date = ShopeeScrape::DATE
+  s.executables << 'shopee'
+  s.summary = 'Scrape categories of mobile01!'
+  s.description = 'Scrape categories of mobile01!'
   s.authors = ['Sheng Jung Wu', 'Calvin Jeng', 'Henry Chang', 'Yi Wei Huang']
   s.files       =  `git ls-files`.split("\n")
   s.test_files  =  `git ls-files spec/*`.split("\n")
-  s.homepage    =  'https://github.com/Smartibuy/ideate-and-scrape'
+  s.homepage    =  'https://github.com/Smartibuy/shopee'
   s.license     =  'MIT'
 
   # depend gem
