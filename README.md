@@ -1,7 +1,7 @@
 Shopee
 ==
 Scrape informations from
-- [Ruten](http://www.ruten.com.tw/) 
+- [Mobie01](http://www.mobile01.com) - [Exacted data](https://github.com/lockys/Mobile01-Ruten-Scraper/blob/master/output/mobile01-category)
 - [Shopee](http://shopee.tw/mobile/) (depreciated)
 
 [![Build Status](https://travis-ci.org/Smartibuy/shopee.svg?branch=master)](https://travis-ci.org/Smartibuy/shopee)
