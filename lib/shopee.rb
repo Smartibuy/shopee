@@ -1,12 +1,9 @@
 require 'oga'
 require 'open-uri'
 require 'json'
-require 'shopee/categories.rb'
-
 
 module ShopeeScrape
-  class Shopeea
-    
+  class ShopeeListGoods
     def initialize(category, page)
       @category = category
       @page = page
@@ -40,4 +37,26 @@ module ShopeeScrape
       result.to_json
     end
   end
+
+  # =============================
+  # List all category of mobile01
+  # =============================
+  class ShopeeListAll
+      require_relative './data/mobile_category'
+
+      def initialize
+          @cate_name = ALL_LINK
+      end
+
+      def get_categories
+          @titles ||= extract_json
+      end
+
+      private
+
+      def extract_json
+          list = @cate_name.keys()
+      end
+  end
+
 end
