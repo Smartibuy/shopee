@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+#!/usr/bin/env ruby
+
+require 'json'
+require 'rubygems'
+require 'commander'
+require_relative '../lib/shopee/categories'
+
+
+Commander.configure do
+  program :name, 'shopee'
+  program :version, '0.0.1'
+  program :description, 'Scrape informations from Mobile01'
+
+    command :show do |c|
+    c.syntax = 'shopee show all-cate'
+    c.description = 'List all categories'
+  
+    c.action do |args, options|
+      shopeecate = ShopeeCategory::ShopeeName.new
+      puts shopeecate.get_categories
+    end
+  end
+
+end

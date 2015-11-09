@@ -1,17 +1,15 @@
 require 'oga'
 require 'open-uri'
 require 'json'
+require 'shopee/categories.rb'
 
 
-module ShopeeTileScrape
-  class ShopeeTile
-
-    URL = 'http://mall.shopee.tw/?utm_source=OrganicA&utm_medium=OrganicA&utm_campaign=lp_home_mall'
-    XPATH_CARD = "//div[(@class='title')]"
-    CARD_TITLE_XPATH = "//div[(@class='list-wrapper')]"
-
-    def initialize
-      parse_html
+module ShopeeScrape
+  class Shopeea
+    
+    def initialize(category, page)
+      @category = category
+      @page = page
     end
 
     def titles
