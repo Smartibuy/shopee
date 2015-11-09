@@ -1,18 +1,15 @@
 require 'oga'
 require 'open-uri'
 require 'json'
+require 'shopee/categories.rb'
 
 
-module ShopeeTileScrape
-  class ShopeeTile
-
-    URL = 'http://www.mobile01.com/mpindex.php'
-    CARD_CAT_XPATH = "//div[(@class='cate-list')]"
-    XPATH_CARD = "//dl[(@class='cl-item')]"
-
-
-    def initialize
-      parse_html
+module ShopeeScrape
+  class Shopee
+    
+    def initialize(category, page)
+      @category = category
+      @page = page
     end
 
     def titles
@@ -28,7 +25,7 @@ module ShopeeTileScrape
 
     def extract_titles
       result = []
-      @document.xpath(CARD_CAT_XPATH).map do |card|
+      @document.xpath(CARD_TITLE_XPATH).map do |card|
         card.xpath(XPATH_CARD).map do |item|
 
           stri = item.text
@@ -40,7 +37,7 @@ module ShopeeTileScrape
           end
         end
       end
-      result.to_json.split("\\n")
+      result.to_json
     end
   end
 end
