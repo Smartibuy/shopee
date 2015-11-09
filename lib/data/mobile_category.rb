@@ -1,5 +1,4 @@
-aa = 1
-all_links = { "電腦資訊"=>"http://www.mobile01.com/mpcatlist.php?c=1",
+ALL_LINK = { "電腦資訊"=>"http://www.mobile01.com/mpcatlist.php?c=1",
   "桌上型電腦"=>"http://www.mobile01.com/mpcatlist.php?c=9",
   "核心組件"=>"http://www.mobile01.com/mpcatlist.php?c=11",
   "儲存裝置"=>"http://www.mobile01.com/mpcatlist.php?c=58",
