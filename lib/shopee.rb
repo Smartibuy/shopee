@@ -45,7 +45,7 @@ module ShopeeScrape
       require_relative './data/mobile_category'
 
       def initialize
-          parse_cate
+          @cate_name = ALL_LINK
       end
 
       def get_categories
@@ -53,10 +53,6 @@ module ShopeeScrape
       end
 
       private
-
-      def parse_cate
-          @cate_name = ALL_LINK
-      end
 
       def extract_json
           list = @cate_name.keys()
