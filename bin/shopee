@@ -4,6 +4,7 @@
 require 'json'
 require 'rubygems'
 require 'commander'
+require_relative '../lib/shopee/categories'
 
 
 Commander.configure do
@@ -16,10 +17,8 @@ Commander.configure do
     c.description = 'List all categories'
   
     c.action do |args, options|
-      file = File.read("./lib/data/mobile_category.json")
-      cate_name = JSON.parse(file)
-      puts cate_name.keys
-      
+      shopeecate = ShopeeCategory::ShopeeName.new
+      puts shopeecate.get_categories
     end
   end
 

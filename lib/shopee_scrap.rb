@@ -5,7 +5,7 @@ require 'shopee/categories.rb'
 
 
 module ShopeeScrape
-  class Shopee
+  class Shopeea
     
     def initialize(category, page)
       @category = category
