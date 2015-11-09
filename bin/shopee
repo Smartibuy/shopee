@@ -8,7 +8,7 @@ require_relative '../lib/shopee'
 
 Commander.configure do
   program :name, 'shopee'
-  program :version, '0.0.3'
+  program :version, '0.0.4'
   program :description, 'Scrape informations from Mobile01'
 
     command :show do |c|
