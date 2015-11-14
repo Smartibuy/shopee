@@ -11,14 +11,25 @@ Commander.configure do
   program :version, '0.0.4'
   program :description, 'Scrape informations from Mobile01'
 
-    command :show do |c|
-    c.syntax = 'shopee show all-cate'
-    c.description = 'List all categories'
+    command :list do |c|
+      c.syntax = 'shopee list [args]'
+      c.description = 'List all categories'
 
-    c.action do |args, options|
-      shopeecate = ShopeeScrape::ShopeeListAll.new
-      puts shopeecate.get_categories
+      c.action do |args, options|
+          shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(args[0])
+          puts shopeecate.goods
+      end
     end
-  end
+
+    command :allcate do |c|
+      c.syntax = 'shopee allcate '
+      c.description = 'List all categories'
+
+      c.action do |args, options|
+        shopeecate = ShopeeScrape::ShopeeListAll.new
+        puts shopeecate.get_categories
+      end
+    end
+
 
 end
