@@ -155,13 +155,13 @@ describe 'Testing all categories of mobile01.' do
   end
 end
 
-# VCR.use_cassette('shopee') do
-#   //It should be placed outside.
-#   scraper = ShopeeTileScrape::ShopeeTile.new
-#   describe 'Shopee testament using vcr' do
-#     it 'should return an array of string and name of categories' do
-#       category_arr = JSON.parse(scraper.titles)
-#       category_arr.must_equal TESTAMENT_ARR
-#     end
-#   end
-# end
+VCR.use_cassette('shopee') do
+  # //It should be placed outside.
+  shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new('電腦資訊')
+  describe 'Shopee testament using vcr' do
+     it 'should return an array of string and name of categories' do
+       good_list = shopeecate.goods
+       good_list.length.must_equal 30
+     end
+  end
+end
