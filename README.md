@@ -15,9 +15,16 @@ $ gem install shopee
 ```
 
 ### Supported CLI
+
 ```
-$ shopee show all-cate
+## 1. List all categories of market of Mobile01
+$ shopee allcate
+
+## 2. List top 30 goods by a category
+$ shopee list [category_name]
+
 ```
+
 
 ### Usage
 **1. List all categories of market of Mobile01**
@@ -173,6 +180,53 @@ GPS
 中部地區
 南部地區
 東部與外島地區
+```
+
+
+**2. List top 30 goods by a category**
+```ruby
+require 'shopee'
+##Example ：category is '電腦資訊'
+category_name = '電腦資訊'
+shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(category_name)
+puts shopeecate.goods
+```
+
+- Expected output
+```
+
+##Example ： category is '電腦資訊'
+
+{"name"=>"CM STORM SIRUS-C 天狼星 耳機麥克風  瞳(冰心淚) (60)　商品所在地:台北市", "price"=>"  3,500元", "num"=>"4", "update_time"=>"2015-11-15"}
+{"name"=>"極新 Intel 535系列 240G  M.2 SATA  zounglun (14)　商品所在地:台北市", "price"=>"  7,500元", "num"=>"9", "update_time"=>"2015-11-15"}
+{"name"=>"iPad mini2 16G 4G版 太空灰  夢幻之尊1 (7)　商品所在地:新竹市", "price"=>"  9,500元", "num"=>"3", "update_time"=>"2015-11-15"}
+{"name"=>"IPad air 16G LTE  timleetw1 (50)　商品所在地:新北市", "price"=>"  11,000元", "num"=>"0", "update_time"=>"2015-11-15"}
+{"name"=>"Sony平版 Z3 Tablet Compacth LTE sim卡  by670917 (26)　商品所在地:基隆市", "price"=>"3,550元  4,000元", "num"=>"2", "update_time"=>"2015-11-15"}
+{"name"=>"ASUS MB169B+ 外接式螢幕 ( 15.6 \")  angel660209 (0)　商品所在地:新北市", "price"=>"  25,000元", "num"=>"1", "update_time"=>"2015-11-15"}
+{"name"=>"2011 Apple MacBook Pro 13吋 /i5/16G/878GB  hl_hl (5)　商品所在地:新北市", "price"=>"  12,000元", "num"=>"3", "update_time"=>"2015-11-15"}
+{"name"=>"iPad Air Wi-Fi + Cellular(4G/LTE) 32GB 銀色  setry (1)　商品所在地:台北市", "price"=>"  38,000元", "num"=>"2", "update_time"=>"2015-11-15"}
+{"name"=>"全新未拆  Macbook Pro Retina i5 2.7GHz/8G/128/2015年新款  daniel6060 (37)　商品所在地:台北市", "price"=>"  13,990元", "num"=>"0", "update_time"=>"2015-11-15"}
+{"name"=>"SONY I5四核心執行續+8G大容量記憶體+獨顯1G+硬碟500G+藍光機+原廠充電器  安康-Mr.詹 (1)　商品所在地:新北市　(可交換商品)", "price"=>"  19,500元", "num"=>"0", "update_time"=>"2015-11-15"}
+{"name"=>"104年7月購入 Surface 3 4gRam 128gRom 已貼玻璃貼附紅色鍵盤+觸控筆  baggio (25)　商品所在地:台北市", "price"=>"  1,700元", "num"=>"3", "update_time"=>"2015-11-15"}
+{"name"=>"優派ViewSonic 19吋 VA1938wa-LED背光液晶  perryhsiao198... (1)　商品所在地:台北市", "price"=>"47,000元  48,800元", "num"=>"1", "update_time"=>"2015-11-15"}
+{"name"=>"UX501JW-0352A4720HQ 512G SSD最高階版本  劉羿呈 (0)　商品所在地:新北市", "price"=>"  1,100元", "num"=>"0", "update_time"=>"2015-11-15"}
+{"name"=>"電腦主機+Benq螢幕『內含系統與Office/適合小朋友使用  安康-Mr.詹 (1)　商品所在地:新北市　(可交換商品)", "price"=>"20,000元  21,000元", "num"=>"8", "update_time"=>"2015-11-15"}
+{"name"=>"Lenovo T530 i7-3630QM真四核筆電  Rainbowsky (28)　商品所在地:宜蘭縣　(可交換商品)", "price"=>"  7,700元", "num"=>"2", "update_time"=>"2015-11-15"}
+{"name"=>"Acer 4743G I5-520M/Win10/4G/SSD+320G HDD/GT540M獨顯/14...  a82820a (9)　商品所在地:台北市", "price"=>"  80元", "num"=>"0", "update_time"=>"2015-11-15"}
+{"name"=>"APPLE 蘋果 筆記型電腦 鍵盤膜 MacBook Air Pro 13.3吋 15.4吋 超薄 TP...  gf0902 (10)　商品所在地:台中市", "price"=>"  80元", "num"=>"0", "update_time"=>"2015-11-15"}
+{"name"=>"APPLE 蘋果 筆記型電腦 鍵盤膜 MacBook Air Pro 11 超薄 TPU保護膜  gf0902 (10)　商品所在地:台中市", "price"=>"500元  1,000元", "num"=>"0", "update_time"=>"2015-11-15"}
+{"name"=>"超誇張100元起 D-Link友訊 DIR-820L 802.11ac AC1200 雙頻無線路由器  o680680o (3)　商品所在地:新北市", "price"=>"4,700元  9,000元", "num"=>"2", "update_time"=>"2015-11-15"}
+{"name"=>"Lenovo Yoga Table2  小海龜 (52)　商品所在地:桃園市", "price"=>"  15,000元", "num"=>"1", "update_time"=>"2015-11-15"}
+{"name"=>"【手機玩家】IPHONE6 16G金外觀約九成新保固至2016-7月  Anycall0314 (49)　商品所在地:新竹市", "price"=>"  6,000元", "num"=>"0", "update_time"=>"2015-11-15"}
+{"name"=>"1U 機架型ATOM主機 雙LAN  kahnmao (60)　商品所在地:新北市", "price"=>"20,000元  25,000元", "num"=>"0", "update_time"=>"2015-11-15"}
+{"name"=>"2013年中 13吋 Macbook air [A1466]  wpchang (0)　商品所在地:台北市　(可交換商品)", "price"=>"  6,200元", "num"=>"1", "update_time"=>"2015-11-15"}
+{"name"=>"極新保固中ASUS RT-AC87U AC2400華碩雙頻無線路由器(2.4/5GHz)  cham3130n (1)　商品所在地:台北市", "price"=>"  12,000元", "num"=>"3", "update_time"=>"2015-11-15"}
+{"name"=>"Surface Pro 1 鍵盤、觸控筆  dih0512 (6)　商品所在地:桃園市　(可交換商品)", "price"=>"  50元", "num"=>"0", "update_time"=>"2015-11-15"}
+{"name"=>"(11/15到貨) 創見 DDR 400 1G 桌上型記憶體 功能正常良品 $50元/1支  QQ\"嘿 (71)　商品所在地:桃園市", "price"=>"5,500元  6,000元", "num"=>"0", "update_time"=>"2015-11-15"}
+{"name"=>"賣99.99新黑色ASUS MeMO Pad 7 (ME572CL) 2GB/16GB LTE  星空下的雨 (31)　商品所在地:新北市　(可交換商品)", "price"=>"  10,500元", "num"=>"2", "update_time"=>"2015-11-15"}
+{"name"=>"Synology DS1511+ 5 bay 專為中小型企業設計的高效能 NAS 伺服器  dg4838 (13)　商品所在地:台北市", "price"=>"  2,700元", "num"=>"2", "update_time"=>"2015-11-15"}
+{"name"=>"全新未拆 羅技MX Master  fervidity (5)　商品所在地:台中市　(可交換商品)", "price"=>"9,500元  10,000元", "num"=>"0", "update_time"=>"2015-11-15"}
+{"name"=>"賣 99.99 新Samsung Galaxy Tab S 8.4 白3G/16G LTE ( 可通話平...  星空下的雨 (31)　商品所在地:新北市　(可交換商品)", "price"=>nil, "num"=>nil, "update_time"=>nil}
 ```
 
 ## License
