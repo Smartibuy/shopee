@@ -13,7 +13,7 @@ Commander.configure do
 
     command :list do |c|
       c.syntax = 'shopee list [args]'
-      c.description = 'List all categories'
+      c.description = 'List goods by the category'
 
       c.action do |args, options|
           shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(args[0])
