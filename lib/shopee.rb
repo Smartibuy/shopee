@@ -89,15 +89,7 @@ module ShopeeScrape
       private
 
       def extract_json
-          list = @cate_name.keys()
-          results = []
-          for i in 0..list.length-1
-            element = {}
-            element['id'] = i
-            element['kind'] = list[i]
-            results << element
-          end
-          results
+           list = @cate_name.keys()
       end
   end
 
