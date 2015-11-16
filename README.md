@@ -23,6 +23,9 @@ $ shopee allcate
 ## 2. List top 30 goods by a category
 $ shopee list [category_name]
 
+## 3. Find top 3 goods in a category by the keyword
+$ shopee search [category_name] [keyword]
+
 ```
 
 
@@ -227,6 +230,20 @@ puts shopeecate.goods
 {"name"=>"Synology DS1511+ 5 bay 專為中小型企業設計的高效能 NAS 伺服器  dg4838 (13)　商品所在地:台北市", "price"=>"  2,700元", "num"=>"2", "update_time"=>"2015-11-15"}
 {"name"=>"全新未拆 羅技MX Master  fervidity (5)　商品所在地:台中市　(可交換商品)", "price"=>"9,500元  10,000元", "num"=>"0", "update_time"=>"2015-11-15"}
 {"name"=>"賣 99.99 新Samsung Galaxy Tab S 8.4 白3G/16G LTE ( 可通話平...  星空下的雨 (31)　商品所在地:新北市　(可交換商品)", "price"=>nil, "num"=>nil, "update_time"=>nil}
+```
+**3. Find top 3 goods in a category by the keyword**
+```ruby
+require 'shopee'
+##Example ：category is '電腦資訊'; keyword is 'samsung'
+cshopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(category)
+goods = shopeecate.goods
+puts shopeecate.search_keyword(goods, keyword)
+```
+- Expected output
+```
+{"name"=>"Samsung GALAXY Tab4 7.0 LTE (未拆封) 只接受面交 價格可再議  schumark (0)　商品所在地:台中市", "price"=>"  5,800元", "num"=>"0", "update_time"=>"2015-11-16"}
+{"name"=>"賣 99.99 新Samsung Galaxy Tab S 8.4 白3G/16G LTE ( 可通話平...  星空下的雨 (31)　商品所在地:新北市　(可交換商品)", "price"=>"  1,000元", "num"=>"4", "update_time"=>"2015-11-16"}
+{"name"=>"Samsung Tab S 8.4 WIFI 黑金 極新無傷 保固至明年4月 附購買證明 s2.mini...  153013 (11)　商品所在地:桃園市　(可交換商品)", "price"=>"  4,600元", "num"=>"1", "update_time"=>"2015-11-16"}
 ```
 
 ## License
