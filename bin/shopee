@@ -31,5 +31,16 @@ Commander.configure do
       end
     end
 
+    command :search do |c|
+      c.syntax = 'shopee search [args]'
+      c.description = 'search similar good'
+
+      c.action do |args, options|
+        shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(args[0])
+        goods = shopeecate.goods
+        puts shopeecate.search_keyword(goods, args[1])
+      end
+    end
+
 
 end

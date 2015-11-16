@@ -1,6 +1,7 @@
 require 'oga'
 require 'open-uri'
 require 'json'
+require 'fuzzystringmatch'
 
 module ShopeeScrape
   class ShopeeListGoodsByCate
@@ -19,11 +20,13 @@ module ShopeeScrape
       @goods ||= extract_goods
     end
 
+    def search_keyword(good, keyword)
+      @similar ||= find_similiar_goods(goods, keyword)
+    end
+
     private
 
     def parse_html(id)
-      # cate_list = ALL_LINK.keys()
-      # category = cate_list[Integer(id)]
       url = ALL_LINK[id]
       @document = Oga.parse_html(open(url))
     end
@@ -34,22 +37,18 @@ module ShopeeScrape
       num = []
       update_time = []
       @document.xpath(GOOD_NAME).map do |good|
-        #puts good.text
         name << good.text
       end
 
       @document.xpath(GOOD_PRICE).map do |good|
-        #puts good.text
         price << good.text
       end
 
       @document.xpath(GOOD_NUM).map do |good|
-        #puts good.text
         num << good.text
       end
 
       @document.xpath(GOOD_UPTIME).map do |good|
-        #puts good.text
         update_time << good.text
       end
 
@@ -70,7 +69,35 @@ module ShopeeScrape
 
       results
     end
+
+    def find_similiar_goods(goods, keyword)
+      jarow = FuzzyStringMatch::JaroWinkler.create( :native )
+      rank = {}
+      goods.each do |good|
+        good_name = good['name']
+        value = jarow.getDistance(good_name ,keyword)
+        rank[good_name] = value
+      end
+
+      rank_after_sort = Hash[rank.sort_by{|k, v| v}.reverse]
+      key = rank_after_sort.keys()
+      results = []
+      for i in 0..2
+        good_name = key[i]
+        goods.each do |good|
+          if good['name'] == good_name
+            results << good
+            break
+          end
+        end
+      end
+
+      results
+
+    end
   end
+
+
 
   # =============================
   # List all category of mobile01
