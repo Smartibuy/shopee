@@ -20,8 +20,8 @@ module ShopeeScrape
       @goods ||= extract_goods
     end
 
-    def search_keyword(good, keyword)
-      @similar ||= find_similiar_goods(goods, keyword)
+    def search_keyword(good, keyword, list_num)
+      @similar ||= find_similiar_goods(goods, keyword, list_num)
     end
 
     private
@@ -70,7 +70,7 @@ module ShopeeScrape
       results
     end
 
-    def find_similiar_goods(goods, keyword)
+    def find_similiar_goods(goods, keyword, list_num)
       jarow = FuzzyStringMatch::JaroWinkler.create( :native )
       rank = {}
       goods.each do |good|
@@ -82,7 +82,7 @@ module ShopeeScrape
       rank_after_sort = Hash[rank.sort_by{|k, v| v}.reverse]
       key = rank_after_sort.keys()
       results = []
-      for i in 0..2
+      for i in 0..list_num.to_i - 1
         good_name = key[i]
         goods.each do |good|
           if good['name'] == good_name
