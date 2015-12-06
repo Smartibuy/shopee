@@ -38,7 +38,7 @@ Commander.configure do
       c.action do |args, options|
         shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(args[0])
         goods = shopeecate.goods
-        puts shopeecate.search_keyword(goods, args[1])
+        puts shopeecate.search_keyword(goods, args[1], args[2])
       end
     end
 
