@@ -235,7 +235,7 @@ puts shopeecate.goods
 ```ruby
 require 'shopee'
 ##Example ：category is '電腦資訊'; keyword is 'samsung'
-cshopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(category)
+shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(category)
 goods = shopeecate.goods
 puts shopeecate.search_keyword(goods, keyword)
 ```
