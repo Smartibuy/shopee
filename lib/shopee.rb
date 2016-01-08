@@ -44,7 +44,6 @@ module ShopeeScrape
         i += 1
         begin
           url_t = url +'&p='+i.to_s
-          open url_t, :proxy=>true
           @document << Oga.parse_html(open(url_t))
         rescue
           check = 0
