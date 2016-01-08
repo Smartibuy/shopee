@@ -20,11 +20,11 @@ $ gem install shopee
 ## 1. List all categories of market of Mobile01
 $ shopee allcate
 
-## 2. List top 30 goods by a category
+## 2. List goods by a category
 $ shopee list [category_name]
 
-## 3. Find top 3 goods in a category by the keyword
-$ shopee search [category_name] [keyword]
+## 3. Find top number goods in a category by the keyword
+$ shopee search [category_name] [keyword] [num]
 
 ```
 
