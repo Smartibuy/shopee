@@ -7,6 +7,7 @@ module ShopeeScrape
   class ShopeeListGoodsByCate
 
     require_relative './data/mobile_category'
+    GOOD_INFO = "//div[contains(@class, 'img')]"
     GOOD_NAME = "//div[contains(@class, 'subject')]"
     GOOD_PRICE = "//div[contains(@class, 'price')]"
     GOOD_NUM = "//div[contains(@class, 'num')]"
@@ -27,46 +28,85 @@ module ShopeeScrape
     private
 
     def parse_html(id)
+      @document = []
       url = ALL_LINK[id]
-      @document = Oga.parse_html(open(url))
+      @document << Oga.parse_html(open(url))
+
+      page_num = 2
+      if CATEGORY_LIST.include?(id) == true
+        page_num = 5
+      end
+
+      check = 1
+      i = 1
+
+      while check == 1 && i < page_num
+        i += 1
+        begin
+          url_t = url +'&p='+i.to_s
+          open url_t, :proxy=>true
+          @document << Oga.parse_html(open(url_t))
+        rescue
+          check = 0
+        end
+      end
+
     end
 
     def extract_goods
-      name = []
-      price = []
-      num = []
-      update_time = []
-      @document.xpath(GOOD_NAME).map do |good|
-        name << good.text
-      end
 
-      @document.xpath(GOOD_PRICE).map do |good|
-        price << good.text
-      end
-
-      @document.xpath(GOOD_NUM).map do |good|
-        num << good.text
-      end
-
-      @document.xpath(GOOD_UPTIME).map do |good|
-        update_time << good.text
-      end
-
-      number = name.length
       results = []
-      # puts number
-      if number > 32
-        number = 32
-      end
-      for i in 2..number-1
-        element = {}
-        element['name'] = name[i]
-        element['price'] = price[i]
-        element['num'] = num[i]
-        element['update_time'] = update_time[i]
-        results << element
-      end
 
+      @document.each do |doc|
+
+        name = []
+        price = []
+        num = []
+        update_time = []
+        pic = []
+        link = []
+
+        doc.xpath(GOOD_NAME).map do |good|
+          name << good.text
+        end
+
+        doc.xpath(GOOD_PRICE).map do |good|
+          price << good.text
+        end
+
+        doc.xpath(GOOD_NUM).map do |good|
+          num << good.text
+        end
+
+        doc.xpath(GOOD_UPTIME).map do |good|
+          update_time << good.text
+        end
+
+        doc.xpath(GOOD_INFO).map do |good|
+          link << good.css('a').attribute('href')[0].to_s
+          # puts good.css('img').attribute('src')[0].to_s
+          pic << good.css('img').attribute('src')[0].to_s
+        end
+
+        number = name.length
+
+        # puts number
+        if number > 32
+          number = 32
+        end
+        for i in 2..number-1
+          element = {}
+          element['name'] = name[i]
+          element['price'] = price[i]
+          element['num'] = num[i]
+          element['update_time'] = update_time[i]
+          element['link'] = link[i]
+          element['pic'] = pic[i]
+          results << element
+        end
+
+      end
+      puts results.length
       results
     end
 

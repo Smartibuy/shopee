@@ -140,3 +140,4 @@ ALL_LINK = { "電腦資訊"=>"http://www.mobile01.com/mpcatlist.php?c=1",
   "南部地區"=>"http://www.mobile01.com/mpcatlist.php?c=90",
   "東部與外島地區"=>"http://www.mobile01.com/mpcatlist.php?c=91"
 }
+CATEGORY_LIST = ["電腦資訊", "手持通訊", "攝影器材", "數位家電", "休閒旅遊", "生活用品", "汽車", "機車", "自行車", "男性時尚", "女性流行", "代購與虛擬物品", "房屋地產"]
