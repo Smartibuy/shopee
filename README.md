@@ -21,10 +21,10 @@ $ gem install shopee
 $ shopee allcate
 
 ## 2. List goods by a category
-$ shopee list [category_name]
+$ shopee list [category_name] [page_number]
 
 ## 3. Find top number goods in a category by the keyword
-$ shopee search [category_name] [keyword] [num]
+$ shopee search [category_name] [keyword] [number_of_product]
 
 ```
 
@@ -191,7 +191,8 @@ GPS
 require 'shopee'
 ##Example ：category is '電腦資訊'
 category_name = '電腦資訊'
-shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(category_name)
+page = 1
+shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(category_name, page)
 puts shopeecate.goods
 ```
 
@@ -235,9 +236,8 @@ puts shopeecate.goods
 ```ruby
 require 'shopee'
 ##Example ：category is '電腦資訊'; keyword is 'samsung'
-shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(category)
-goods = shopeecate.goods
-puts shopeecate.search_keyword(goods, keyword, num)
+shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new()
+puts shopeecate.search_keyword('電腦資訊', 'Asus', '10')
 ```
 - Expected output
 ```

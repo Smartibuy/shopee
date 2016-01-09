@@ -4,6 +4,10 @@ require 'json'
 require 'fuzzystringmatch'
 
 module ShopeeScrape
+
+  # =============================
+  # Class For List products by category and search products with keyword
+  # =============================
   class ShopeeListGoodsByCate
 
     require_relative './data/mobile_category'
@@ -13,51 +17,40 @@ module ShopeeScrape
     GOOD_NUM = "//div[contains(@class, 'num')]"
     GOOD_UPTIME = "//div[contains(@class, 'updated')]"
 
-    def initialize(category)
-      parse_html(category)
+    def initialize(category=nil, page=nil)
+      puts category, page
+      if !category.nil? && !page.nil?
+        get_page_html(category, page)
+      end
     end
 
     def goods
       @goods ||= extract_goods
     end
 
-    def search_keyword(good, keyword, list_num)
-      @similar ||= find_similiar_goods(goods, keyword, list_num)
+    def search_keyword(category, keyword, list_num)
+      @similar ||= find_similiar_goods(category, keyword, list_num)
     end
 
     private
 
-    def parse_html(id)
+    def get_page_html(cate, page)
       @document = []
-      url = ALL_LINK[id]
-      @document << Oga.parse_html(open(url))
+      url = ALL_LINK[cate]
 
-      page_num = 2
-      if CATEGORY_LIST.include?(id) == true
-        page_num = 5
-      end
-
-      check = 1
-      i = 1
-
-      while check == 1 && i < page_num
-        i += 1
-        begin
-          url_t = url +'&p='+i.to_s
-          @document << Oga.parse_html(open(url_t))
-        rescue
-          check = 0
+      if CATEGORY_LIST.include?(cate)
+        if page != 1
+          @document << Oga.parse_html(open(url << '&p=' << page.to_s))
+        else
+          @document << Oga.parse_html(open(url))
         end
       end
-
     end
 
     def extract_goods
-
       results = []
 
       @document.each do |doc|
-
         name = []
         price = []
         num = []
@@ -83,7 +76,6 @@ module ShopeeScrape
 
         doc.xpath(GOOD_INFO).map do |good|
           link << good.css('a').attribute('href')[0].to_s
-          # puts good.css('img').attribute('src')[0].to_s
           pic << good.css('img').attribute('src')[0].to_s
         end
 
@@ -93,6 +85,7 @@ module ShopeeScrape
         if number > 32
           number = 32
         end
+
         for i in 2..number-1
           element = {}
           element['name'] = name[i]
@@ -105,17 +98,32 @@ module ShopeeScrape
         end
 
       end
+
       puts results.length
       results
     end
 
-    def find_similiar_goods(goods, keyword, list_num)
+    def find_similiar_goods(category, keyword, list_num)
+      goods = []
+      goodsSet = []
+
+      for i in 1..5
+        shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(category, i)
+        goodsSet << shopeecate.goods
+      end
+
+      goodsSet.each do |good|
+        good.each do |g|
+          goods << g
+        end
+      end
+
       jarow = FuzzyStringMatch::JaroWinkler.create( :native )
       rank = {}
+
       goods.each do |good|
-        good_name = good['name']
-        value = jarow.getDistance(good_name ,keyword)
-        rank[good_name] = value
+        value = jarow.getDistance(good['name'] ,keyword)
+        rank[good['name']] = value
       end
 
       rank_after_sort = Hash[rank.sort_by{|k, v| v}.reverse]
@@ -135,8 +143,6 @@ module ShopeeScrape
 
     end
   end
-
-
 
   # =============================
   # List all category of mobile01

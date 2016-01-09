@@ -157,7 +157,7 @@ end
 
 VCR.use_cassette('shopee') do
   # //It should be placed outside.
-  shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new('電腦資訊')
+  shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new('電腦資訊', 1)
   describe 'Shopee testament using vcr' do
      it 'should return an array of string and name of categories' do
        good_list = shopeecate.goods
