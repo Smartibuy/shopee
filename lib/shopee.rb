@@ -18,7 +18,6 @@ module ShopeeScrape
     GOOD_UPTIME = "//div[contains(@class, 'updated')]"
 
     def initialize(category=nil, page=nil)
-      puts category, page
       if !category.nil? && !page.nil?
         get_page_html(category, page)
       end
@@ -32,19 +31,30 @@ module ShopeeScrape
       @similar ||= find_similiar_goods(category, keyword, list_num)
     end
 
+    def get_cate_childs(cate=nil)
+      childs = []
+      if !cate.nil?
+        CATE_TREE[cate].each do |k, v|
+          childs << {k => v}
+        end
+        childs
+      else
+        childs
+      end
+    end
+
     private
 
     def get_page_html(cate, page)
       @document = []
       url = ALL_LINK[cate]
 
-      if CATEGORY_LIST.include?(cate)
-        if page != 1
-          @document << Oga.parse_html(open(url << '&p=' << page.to_s))
-        else
-          @document << Oga.parse_html(open(url))
-        end
+      if page != 1
+        @document << Oga.parse_html(open(url << '&p=' << page.to_s))
+      else
+        @document << Oga.parse_html(open(url))
       end
+
     end
 
     def extract_goods
@@ -99,7 +109,6 @@ module ShopeeScrape
 
       end
 
-      puts results.length
       results
     end
 
