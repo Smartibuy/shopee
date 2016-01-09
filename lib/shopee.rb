@@ -4,79 +4,126 @@ require 'json'
 require 'fuzzystringmatch'
 
 module ShopeeScrape
+
+  # =============================
+  # Class For List products by category and search products with keyword
+  # =============================
   class ShopeeListGoodsByCate
 
     require_relative './data/mobile_category'
+    GOOD_INFO = "//div[contains(@class, 'img')]"
     GOOD_NAME = "//div[contains(@class, 'subject')]"
     GOOD_PRICE = "//div[contains(@class, 'price')]"
     GOOD_NUM = "//div[contains(@class, 'num')]"
     GOOD_UPTIME = "//div[contains(@class, 'updated')]"
 
-    def initialize(category)
-      parse_html(category)
+    def initialize(category=nil, page=nil)
+      puts category, page
+      if !category.nil? && !page.nil?
+        get_page_html(category, page)
+      end
     end
 
     def goods
       @goods ||= extract_goods
     end
 
-    def search_keyword(good, keyword, list_num)
-      @similar ||= find_similiar_goods(goods, keyword, list_num)
+    def search_keyword(category, keyword, list_num)
+      @similar ||= find_similiar_goods(category, keyword, list_num)
     end
 
     private
 
-    def parse_html(id)
-      url = ALL_LINK[id]
-      @document = Oga.parse_html(open(url))
+    def get_page_html(cate, page)
+      @document = []
+      url = ALL_LINK[cate]
+
+      if CATEGORY_LIST.include?(cate)
+        if page != 1
+          @document << Oga.parse_html(open(url << '&p=' << page.to_s))
+        else
+          @document << Oga.parse_html(open(url))
+        end
+      end
     end
 
     def extract_goods
-      name = []
-      price = []
-      num = []
-      update_time = []
-      @document.xpath(GOOD_NAME).map do |good|
-        name << good.text
-      end
-
-      @document.xpath(GOOD_PRICE).map do |good|
-        price << good.text
-      end
-
-      @document.xpath(GOOD_NUM).map do |good|
-        num << good.text
-      end
-
-      @document.xpath(GOOD_UPTIME).map do |good|
-        update_time << good.text
-      end
-
-      number = name.length
       results = []
-      # puts number
-      if number > 32
-        number = 32
-      end
-      for i in 2..number-1
-        element = {}
-        element['name'] = name[i]
-        element['price'] = price[i]
-        element['num'] = num[i]
-        element['update_time'] = update_time[i]
-        results << element
+
+      @document.each do |doc|
+        name = []
+        price = []
+        num = []
+        update_time = []
+        pic = []
+        link = []
+
+        doc.xpath(GOOD_NAME).map do |good|
+          name << good.text
+        end
+
+        doc.xpath(GOOD_PRICE).map do |good|
+          price << good.text
+        end
+
+        doc.xpath(GOOD_NUM).map do |good|
+          num << good.text
+        end
+
+        doc.xpath(GOOD_UPTIME).map do |good|
+          update_time << good.text
+        end
+
+        doc.xpath(GOOD_INFO).map do |good|
+          link << good.css('a').attribute('href')[0].to_s
+          pic << good.css('img').attribute('src')[0].to_s
+        end
+
+        number = name.length
+
+        # puts number
+        if number > 32
+          number = 32
+        end
+
+        for i in 2..number-1
+          element = {}
+          element['name'] = name[i]
+          element['price'] = price[i]
+          element['num'] = num[i]
+          element['update_time'] = update_time[i]
+          element['link'] = link[i]
+          element['pic'] = pic[i]
+          results << element
+        end
+
       end
 
+      puts results.length
       results
     end
 
-    def find_similiar_goods(goods, keyword, list_num)
+    def find_similiar_goods(category, keyword, list_num)
+      goods = []
+      goodsSet = []
+
+      for i in 1..5
+        shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(category, i)
+        goodsSet << shopeecate.goods
+      end
+
+      goodsSet.each do |good|
+        good.each do |g|
+          goods << g
+        end
+      end
+
       jarow = FuzzyStringMatch::JaroWinkler.create( :native )
       rank = {}
+
       goods.each do |good|
-        good_name = good['name']
-        value = jarow.getDistance(good_name ,keyword)
-        rank[good_name] = value
+        value = jarow.getDistance(good['name'] ,keyword)
+        rank[good['name']] = value
       end
 
       rank_after_sort = Hash[rank.sort_by{|k, v| v}.reverse]
@@ -96,8 +143,6 @@ module ShopeeScrape
 
     end
   end
-
-
 
   # =============================
   # List all category of mobile01

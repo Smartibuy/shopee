@@ -12,11 +12,11 @@ Commander.configure do
   program :description, 'Scrape informations from Mobile01'
 
     command :list do |c|
-      c.syntax = 'shopee list [args]'
+      c.syntax = 'shopee list [category] [page]'
       c.description = 'List goods by the category'
 
       c.action do |args, options|
-          shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(args[0])
+          shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(args[0], args[1])
           puts shopeecate.goods
       end
     end
@@ -32,13 +32,12 @@ Commander.configure do
     end
 
     command :search do |c|
-      c.syntax = 'shopee search [args]'
+      c.syntax = 'shopee search [category] [keyword] [number of products]'
       c.description = 'search similar good'
 
       c.action do |args, options|
-        shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(args[0])
-        goods = shopeecate.goods
-        puts shopeecate.search_keyword(goods, args[1], args[2])
+        shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new()
+        puts shopeecate.search_keyword(args[0], args[1], args[2])
       end
     end
 

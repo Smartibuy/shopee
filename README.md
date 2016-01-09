@@ -20,11 +20,11 @@ $ gem install shopee
 ## 1. List all categories of market of Mobile01
 $ shopee allcate
 
-## 2. List top 30 goods by a category
-$ shopee list [category_name]
+## 2. List goods by a category
+$ shopee list [category_name] [page_number]
 
-## 3. Find top 3 goods in a category by the keyword
-$ shopee search [category_name] [keyword]
+## 3. Find top number goods in a category by the keyword
+$ shopee search [category_name] [keyword] [number_of_product]
 
 ```
 
@@ -186,12 +186,13 @@ GPS
 ```
 
 
-**2. List top 30 goods by a category**
+**2. List goods by a category**
 ```ruby
 require 'shopee'
 ##Example ：category is '電腦資訊'
 category_name = '電腦資訊'
-shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(category_name)
+page = 1
+shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(category_name, page)
 puts shopeecate.goods
 ```
 
@@ -231,13 +232,12 @@ puts shopeecate.goods
 {"name"=>"全新未拆 羅技MX Master  fervidity (5)　商品所在地:台中市　(可交換商品)", "price"=>"9,500元  10,000元", "num"=>"0", "update_time"=>"2015-11-15"}
 {"name"=>"賣 99.99 新Samsung Galaxy Tab S 8.4 白3G/16G LTE ( 可通話平...  星空下的雨 (31)　商品所在地:新北市　(可交換商品)", "price"=>nil, "num"=>nil, "update_time"=>nil}
 ```
-**3. Find top 3 goods in a category by the keyword**
+**3. Find top num goods in a category by the keyword**
 ```ruby
 require 'shopee'
 ##Example ：category is '電腦資訊'; keyword is 'samsung'
-cshopeecate = ShopeeScrape::ShopeeListGoodsByCate.new(category)
-goods = shopeecate.goods
-puts shopeecate.search_keyword(goods, keyword)
+shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new()
+puts shopeecate.search_keyword('電腦資訊', 'Asus', '10')
 ```
 - Expected output
 ```

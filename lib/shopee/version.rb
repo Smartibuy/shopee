@@ -1,4 +1,4 @@
 module ShopeeScrape
-  VERSION = '0.1.2'
-  DATE = '2015-12-06'
+  VERSION = '1.0.0'
+  DATE = '2016-01-09'
 end
