@@ -41,5 +41,13 @@ Commander.configure do
       end
     end
 
+    command :child do |c|
+      c.syntax = 'shopee child [category]'
+      c.description = 'Get sub-category.'
 
+      c.action do |args, options|
+        shopeecate = ShopeeScrape::ShopeeListGoodsByCate.new()
+        puts shopeecate.get_cate_childs(args[0])
+      end
+    end
 end
