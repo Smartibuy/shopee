@@ -99,9 +99,9 @@ module ShopeeScrape
         for i in 2..number-1
           element = {}
           element['name'] = name[i]
-          element['price'] = price[i]
-          element['num'] = num[i]
-          element['update_time'] = update_time[i]
+          element['price'] = price[i-1]
+          element['num'] = num[i-1]
+          element['update_time'] = update_time[i-1]
           element['link'] = link[i]
           element['pic'] = pic[i]
           results << element
